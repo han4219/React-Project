@@ -9,18 +9,10 @@ import NotFound from './pages/NotFound/NotFound'
 export default function Routers() {
   return (
     <Routes>
-      <Route path={path.home} exact>
-        <Home />
-      </Route>
-      <Route path={path.login}>
-        <Login />
-      </Route>
-      <Route path={path.register}>
-        <Register />
-      </Route>
-      <Route path={path.notFound}>
-        <NotFound />
-      </Route>
+      <Route path={path.home} exact element={<Home />}></Route>
+      <Route path={path.login} element={<Login />}></Route>
+      <Route path={path.register} element={<Register />}></Route>
+      <Route path={path.notFound} element={<NotFound />}></Route>
     </Routes>
   )
 }
