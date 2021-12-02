@@ -45,8 +45,15 @@ export const Col3 = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `
-export const UL = styled.ul``
-export const LI = styled.li``
+export const UL = styled.ul`
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+`
+export const LI = styled.li`
+  margin: 1rem 1.5rem 1.5rem 0;
+  list-style: none;
+`
 
 //start style elements col 3 top
 export const Col3Top = styled.div`
@@ -96,6 +103,7 @@ export const ShopeePay = styled.div`
 
 // start style for elements col 3 bottom
 export const Col3Bottom = styled.div`
+  margin-top: 1.5rem;
   h3 {
     margin-bottom: 1rem;
     color: #707070;
@@ -208,6 +216,14 @@ export const FooterBottom1 = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+export const DangKy = styled.div`
+  background-image: url('https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/4bdefde103e8aa245cd17511adde9f89.png');
+  background-position: -214px -113px;
+  width: 120px;
+  height: 42px;
+  margin-left: -10rem;
 `
 
 export const Language = styled.div`

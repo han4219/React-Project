@@ -100,23 +100,23 @@ export default function Footer() {
           {/* start col 4 */}
           <style.Col4>
             <h3>theo dõi chúng tôi trên</h3>
-            <style.UL>
+            <style.UL className="social">
               <style.LI>
                 <style.LinkTag to="/register">
                   <style.Facebook></style.Facebook>
-                  Facebook
+                  <div style={{ 'margin-top': '1rem' }}>Facebook</div>
                 </style.LinkTag>
               </style.LI>
               <style.LI>
                 <style.LinkTag to="/register">
                   <style.Instagram></style.Instagram>
-                  Instagram
+                  <div style={{ 'margin-top': '1rem' }}>Instagram</div>
                 </style.LinkTag>
               </style.LI>
               <style.LI>
                 <style.LinkTag to="/register">
                   <style.LinkedIn></style.LinkedIn>
-                  LinkedIn
+                  <div style={{ 'margin-top': '1rem' }}>LinkedIn</div>
                 </style.LinkTag>
               </style.LI>
             </style.UL>
@@ -126,6 +126,7 @@ export default function Footer() {
         <style.FooterBottom>
           <style.FooterBottom1>
             <div>© 2021 Shopee. Tất cả các quyền được bảo lưu.</div>
+            <style.DangKy></style.DangKy>
             <style.Language>
               Ngôn ngữ:
               <span>Tiếng Việt</span>
