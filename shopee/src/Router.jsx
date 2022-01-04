@@ -7,7 +7,7 @@ import Register from './pages/Auth/Register/Register'
 import Home from './pages/Home/Home'
 import NotFound from './pages/NotFound/NotFound'
 
-export default function Routers() {
+export default function Router() {
   return (
     <Routes>
       <Route path={path.home} exact element={<Home />}></Route>

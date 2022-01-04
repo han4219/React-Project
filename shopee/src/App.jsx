@@ -1,12 +1,12 @@
 import React from 'react'
 import 'normalize.css'
 import 'src/assets/styles/global.scss'
-import Routers from './Routers'
+import Router from './Router'
 
 function App() {
   return (
     <div className="App">
-      <Routers />
+      <Router />
     </div>
   )
 }
