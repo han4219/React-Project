@@ -1,0 +1,52 @@
+@import '../../../src/assets/styles/colors';
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+  color: #fff;
+  font-size: 14px;
+}
+
+.nav-left {
+  padding: 7px 0;
+  > a {
+    color: #fff;
+    padding: 0px 7px;
+    border-right: 1.5px solid rgb(226, 215, 215);
+    &:hover {
+      color: hsla(0, 0%, 100%, 0.7);
+    }
+  }
+  p {
+    display: inline-block;
+    margin-left: 7px;
+    a {
+      color: #fff;
+      padding: 0px 3px;
+      font-size: 15px;
+    }
+  }
+}
+
+.nav-right {
+  display: flex;
+  padding: 7px 0;
+  a {
+    padding: 0px 10px;
+    color: #fff;
+  }
+  select {
+    color: #fff;
+    border: none;
+    background: transparent;
+    option {
+      border: none;
+      color: #000;
+    }
+  }
+  .login {
+    border-right: 1.5px solid rgb(226, 215, 215);
+  }
+}
