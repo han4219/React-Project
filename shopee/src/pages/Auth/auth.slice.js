@@ -15,15 +15,21 @@ export const login = createAsyncThunk(
 
 const handleAuthFulfilled = (state, action) => {
   const { access_token, user } = action.payload.data
-  state.auth.profile = user
-  localStorage.setItem(LocalStorage.user, JSON.stringify(user))
+  state.profile = user
+  localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile))
   localStorage.setItem(LocalStorage.accessToken, JSON.stringify(access_token))
 }
 
 const auth = createSlice({
   name: 'auth',
   initialState: {
-    profile: localStorage.getItem(LocalStorage.user) || {}
+    profile: JSON.parse(localStorage.getItem(LocalStorage.user)) || {}
+  },
+  reducers: {
+    removeOnLogout: state => {
+      window.localStorage.clear()
+      state.profile = {}
+    }
   },
   extraReducers: {
     [register.fulfilled]: handleAuthFulfilled,
@@ -32,5 +38,5 @@ const auth = createSlice({
 })
 
 const authReducer = auth.reducer
-
+export const { removeOnLogout } = auth.actions
 export default authReducer

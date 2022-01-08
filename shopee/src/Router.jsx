@@ -38,6 +38,16 @@ export default function Router() {
           </RegisterLayout>
         }
       ></Route>
+      <Route
+        path={path.cart}
+        element={
+          <React.Fragment>
+            <MainLayout>
+              <Home />
+            </MainLayout>
+          </React.Fragment>
+        }
+      ></Route>
       <Route path={path.notFound} element={<NotFound />}></Route>
     </Routes>
   )

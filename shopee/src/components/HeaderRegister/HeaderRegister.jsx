@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import * as S from './headerRegister.style'
 
@@ -22,4 +23,8 @@ export default function HeaderRegister({ title }) {
       </S.Container>
     </S.Header>
   )
+}
+
+HeaderRegister.propTypes = {
+  title: PropTypes.string
 }
