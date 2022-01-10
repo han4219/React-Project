@@ -1,6 +1,9 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import User from './components/User/User'
 import { path } from './constants/path'
+import AuthenticatedGuard from './guards/AuthenticatedGuard'
+import UnauthenticatedGuard from './guards/UnauthenticatedGuard'
 import MainLayout from './layouts/MainLayout/MainLayout'
 import RegisterLayout from './layouts/RegisterLayout/RegisterLayout'
 import Login from './pages/Auth/Login/Login'
@@ -25,27 +28,43 @@ export default function Router() {
       <Route
         path={path.login}
         element={
-          <RegisterLayout title="Đăng nhập">
-            <Login />
-          </RegisterLayout>
+          <UnauthenticatedGuard>
+            <RegisterLayout title="Đăng nhập">
+              <Login />
+            </RegisterLayout>
+          </UnauthenticatedGuard>
         }
       ></Route>
       <Route
         path={path.register}
         element={
-          <RegisterLayout title="Đăng ký">
-            <Register />
-          </RegisterLayout>
+          <UnauthenticatedGuard>
+            <RegisterLayout title="Đăng ký">
+              <Register />
+            </RegisterLayout>
+          </UnauthenticatedGuard>
         }
       ></Route>
+
+      <Route
+        path={path.user}
+        element={
+          <AuthenticatedGuard>
+            <MainLayout>
+              <User />
+            </MainLayout>
+          </AuthenticatedGuard>
+        }
+      ></Route>
+
       <Route
         path={path.cart}
         element={
-          <React.Fragment>
+          <AuthenticatedGuard>
             <MainLayout>
               <Home />
             </MainLayout>
-          </React.Fragment>
+          </AuthenticatedGuard>
         }
       ></Route>
       <Route path={path.notFound} element={<NotFound />}></Route>

@@ -26,7 +26,6 @@ import useAuthenticated from 'src/hooks/useAuthenticated'
 import { path } from 'src/constants/path'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeOnLogout } from 'src/pages/Auth/auth.slice'
-import { useEffect } from 'react'
 import PopOver from 'src/components/PopOver/PopOver'
 import usePopOver from 'src/hooks/usePopOver'
 
@@ -36,12 +35,9 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const { activePopOver, showPopOver, hidePopOver } = usePopOver()
 
-  useEffect(() => {
-    return () => {
-      dispatch(removeOnLogout())
-    }
-  }, [dispatch])
-
+  const handleLogout = () => {
+    dispatch(removeOnLogout())
+  }
   return (
     <Wrapper>
       <NavLeft>
@@ -85,9 +81,11 @@ export default function Navbar() {
             </UserNameWrapper>
             <PopOver active={activePopOver}>
               <>
-                <UserLink to="">Tài khoản của tôi</UserLink>
+                <UserLink to={path.user}>Tài khoản của tôi</UserLink>
                 <UserLink to="">Đơn mua</UserLink>
-                <UserLink to={path.login}>Đăng xuất</UserLink>
+                <UserLink to="" onClick={handleLogout}>
+                  Đăng xuất
+                </UserLink>
               </>
             </PopOver>
           </User>
