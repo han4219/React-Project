@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SortBar = styled.div`
-  width: 100%;
+  max-width: 90rem;
   margin-left: 1rem;
   display: flex;
   align-items: center;
@@ -48,7 +48,6 @@ export const SortByPrice = styled.select`
 `
 
 export const MiniPageController = styled.div`
-  margin-left: 10rem;
   display: flex;
   align-items: center;
 `
@@ -90,3 +89,11 @@ export const ButtonControlNext = styled(ButtonController)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `
+
+export const ProductList = styled.div`
+  margin-left: 1rem;
+  width: 90rem;
+  display: flex;
+  flex-wrap: wrap;
+`
+export const Pagination = styled.div``

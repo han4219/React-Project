@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Footer = styled.footer`
+  border-top: 5px solid #ee4d2d;
   font-size: 1.4rem;
   color: rgba(0, 0, 0, 0.54);
   padding: 4.2rem 0 3.7rem;
