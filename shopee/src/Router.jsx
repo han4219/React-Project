@@ -10,7 +10,7 @@ import Login from './pages/Auth/Login/Login'
 import Register from './pages/Auth/Register/Register'
 import Home from './pages/Home/Home'
 import NotFound from './pages/NotFound/NotFound'
-
+import ProductDetail from 'src/pages/ProductDetail/ProductDetail'
 export default function Router() {
   return (
     <Routes>
@@ -45,7 +45,17 @@ export default function Router() {
           </UnauthenticatedGuard>
         }
       ></Route>
-
+      <Route
+        path={path.productDetail}
+        exact
+        element={
+          <React.Fragment>
+            <MainLayout>
+              <ProductDetail />
+            </MainLayout>
+          </React.Fragment>
+        }
+      ></Route>
       <Route
         path={path.user}
         element={

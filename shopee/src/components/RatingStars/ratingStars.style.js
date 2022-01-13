@@ -5,7 +5,7 @@ export const StarRatingContainer = styled.div`
   align-items: center;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  &:active {
+  &.active {
     background-color: #ebebeb;
     border-radius: 1rem;
   }

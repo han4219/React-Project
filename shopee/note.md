@@ -14,3 +14,33 @@ Ví dụ:
 - Các data chỉ dùng ở 1 chỗ thì nên lưu ở component.
 - Khi get api thì nên thông qua sử dụng `createAsyncThunk` để có được những action như `.../fulfilled` hoặc `.../rejected` để dễ dàng tracking sử dụng sau này cho các tính năng như loading
 - Không cần thiết phải xử lý mọi action mà `createAsyncThunk` trả về, chỉ xử lý những cái cần dùng. Cũng như không cần thiết phải lưu hết mọi thứ vào redux.
+
+# 3.Filter
+
+## 3.1. Tại sao phải đồng bộ filter lên url
+
+- Chúng ta hoàn toàn có thể filter sản phẩm trên website của chúng ta mà url không hề thay đổi.
+  Nhưng điều này chỉ xảy ra trên máy tính của chúng ta, nếu chúng ta refresh lại trang web sẽ bị mất hoàn toàn filter.
+- Hoặc đơn giản nếu chúng ta gửi url cho 1 người khác thì họ không thấy được những gì mà máy chúng ta đang filter được.
+- Vì thế cần đồng bộ filter lên trên url, khi url thay đổi thì filter cũng thay đổi
+
+## 3.2 Thuật toán
+
+1. Page `Home` sẽ lưu giữ state `filters` và tracking sự thay đổi của url. nếu url thay đổi thì cập nhật lại state `filters` và gọi lại api getProducts
+
+2. State `filters` sẽ được chuyển xuống các component con như `SearchItemResult` hay `FilterPanel` để các component đó tiện xử lý điều hướng
+
+3. Khi thực hiện hành động filter thì chỉ cần chuyển route với `navigate('')` hoặc `Link`. lúc này page `Home` sẽ tracking được url thay đổi và thực hiện cập nhật lại products và filters.
+
+Ví dụ 1 URL là : `http://localhost:3000?limit=30&page=1&rating=3&sortBy=view`
+
+thì lúc này filters sẽ là:
+
+```js
+const filters = {
+  limit: 30,
+  page: 1,
+  rating: 3,
+  sortBy: 'view'
+}
+```

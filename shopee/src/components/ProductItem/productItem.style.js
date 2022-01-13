@@ -112,5 +112,3 @@ export const ProductItemSold = styled.div`
     margin-right: 3px;
   }
 `
-
-export const ProductPlace = styled.div``

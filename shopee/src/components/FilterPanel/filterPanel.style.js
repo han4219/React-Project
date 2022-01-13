@@ -34,14 +34,15 @@ export const CategoryList = styled.ul`
   }
 `
 export const CategoryItem = styled.li`
-  .active {
+  a.active {
     color: #ee4d2d;
+    font-weight: bold;
   }
 `
 export const CategoryTitle = styled.div`
   font-size: 1.6rem;
   font-weight: bold;
-  text-transform: uppercase;
+  text-transform: capitalize;
   i {
     font-size: 1.3rem;
     margin-right: 1rem;
@@ -78,9 +79,9 @@ export const PriceRangeLine = styled.div`
 export const PriceErrorMessage = styled.div`
   font-size: 1.2rem;
   color: #ff424f;
-  padding: 1rem 0;
 `
 export const PriceRangeButton = styled.button`
+  margin-top: 1rem;
   border: none;
   padding: 0.7rem 0;
   width: 100%;

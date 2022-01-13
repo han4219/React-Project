@@ -86,10 +86,16 @@ ví dụ: 'products?page=1&limit=30&order=createdAt&sortBy=asc'
 Method: GET
 
 Query Params:
-page: number
-limit: number
-order: string,
-sortBy:'asc' || 'desc'
+`page`: number - số trang, mặc định là 1
+`limit`: number - số product trên 1 trang, mặc định là 30
+`order`: string - 'desc' || 'asc'. Sắp xếp các product theo thứ thự, default=desc
+`sort_by`: string - 'createAt' || 'view' || 'sold' || 'price'. Sắp xếp theo trường. mặc định là 'createAt'
+`category`: categoryId. lọc sản phẩm theo category.
+`exclude`: productId. loại trừ sản phẩm nào đó
+`rating_filter`: number. lọc sản phẩm có số sao >= rating_filter
+`price_max`: number. giá cao nhất
+`price_min`:number. giá thấp nhất
+`name`: string. tên sản phẩm -> lưu ý tên sp tiếng việt phải gõ đầy đủ dấu
 
 Response
 

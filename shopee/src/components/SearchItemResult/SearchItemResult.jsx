@@ -2,31 +2,100 @@ import React from 'react'
 import * as S from './serchItemResult.style'
 import ProductItem from 'src/components/ProductItem/ProductItem'
 import Pagination from '../Pagination/Pagination'
+import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
+import { path } from 'src/constants/path'
+import qs from 'query-string'
+import classNames from 'classnames'
 
-export default function SearchItemResult() {
+export default function SearchItemResult({ products, filters, pagination }) {
+  const navigate = useNavigate()
+  const sortBy = (sortBy, order) => {
+    let _filters = { ...filters, sortBy }
+    if (order) {
+      _filters.order = order
+    } else {
+      delete _filters.order
+    }
+    navigate(path.home + `?${qs.stringify(_filters)}`)
+  }
+
+  const handleClassActive = value => {
+    return classNames({
+      active: value === filters.sortBy
+    })
+  }
+
+  const handleSearchPriceValue = () => {
+    let value = `${filters.sortBy}:${filters.order}`
+    if (value !== 'price:asc' && value !== 'price:desc') {
+      value = ''
+    }
+    return value
+  }
+
+  const gotoPrev = () => {
+    let _filters = { ...filters, page: pagination.page - 1 }
+    if (pagination.page !== 1) {
+      navigate(path.home + `?${qs.stringify(_filters)}`)
+    }
+  }
+
+  const gotoNext = () => {
+    let _filters = { ...filters, page: pagination.page + 1 }
+    if (pagination.page !== pagination.page_size) {
+      navigate(path.home + `?${qs.stringify(_filters)}`)
+    }
+  }
+
   return (
     <div>
       <S.SortBar>
         <S.SortBarLabel>Sắp xếp theo</S.SortBarLabel>
         <S.SortOption>
-          <S.SortByOption className="active">Phổ biến</S.SortByOption>
-          <S.SortByOption>Mới nhất</S.SortByOption>
-          <S.SortByOption>Bán chạy</S.SortByOption>
-          <S.SortByPrice>
+          <S.SortByOption
+            onClick={() => sortBy('view')}
+            className={handleClassActive('view')}
+          >
+            Phổ biến
+          </S.SortByOption>
+          <S.SortByOption
+            onClick={() => sortBy('createdAt')}
+            className={handleClassActive('createdAt')}
+          >
+            Mới nhất
+          </S.SortByOption>
+          <S.SortByOption
+            onClick={() => sortBy('sold')}
+            className={handleClassActive('sold')}
+          >
+            Bán chạy
+          </S.SortByOption>
+          <S.SortByPrice
+            onChange={e => sortBy(...e.target.value.split(':'))}
+            className={handleClassActive('price')}
+            value={handleSearchPriceValue()}
+          >
             <option disabled value="">
               Giá
             </option>
-            <option value="price: asc">Giá: Thấp đến cao</option>
-            <option value="price: desc">Giá: Cao đến thấp</option>
+            <option value="price:asc">Giá: Thấp đến cao</option>
+            <option value="price:desc">Giá: Cao đến thấp</option>
           </S.SortByPrice>
         </S.SortOption>
         <S.MiniPageController>
           <S.MiniPageControllerState>
-            <S.MiniPaginationCurrent>1</S.MiniPaginationCurrent>/
-            <S.MiniPaginationTotal>2</S.MiniPaginationTotal>
+            <S.MiniPaginationCurrent>{pagination.page}</S.MiniPaginationCurrent>
+            /
+            <S.MiniPaginationTotal>
+              {pagination.page_size}
+            </S.MiniPaginationTotal>
           </S.MiniPageControllerState>
 
-          <S.ButtonControlPrev>
+          <S.ButtonControlPrev
+            onClick={gotoPrev}
+            disabled={pagination.page === 1}
+          >
             <svg
               viewBox="0 0 7 11"
               className="shopee-svg-icon icon-arrow-left-small"
@@ -37,7 +106,10 @@ export default function SearchItemResult() {
               />
             </svg>
           </S.ButtonControlPrev>
-          <S.ButtonControlNext>
+          <S.ButtonControlNext
+            onClick={gotoNext}
+            disabled={pagination.page === pagination.page_size}
+          >
             <svg
               viewBox="0 0 7 11"
               className="shopee-svg-icon icon-arrow-right-small"
@@ -50,21 +122,24 @@ export default function SearchItemResult() {
           </S.ButtonControlNext>
         </S.MiniPageController>
       </S.SortBar>
-
       <S.ProductList>
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
+        {Object.keys(products).length === 0 ? (
+          <div>...Loading</div>
+        ) : (
+          <>
+            {products.map(product => (
+              <ProductItem key={product._id} product={product} />
+            ))}
+          </>
+        )}
       </S.ProductList>
       <S.Pagination>
-        <Pagination />
+        <Pagination pagination={pagination} filters={filters} />
       </S.Pagination>
     </div>
   )
+}
+
+SearchItemResult.propTypes = {
+  products: PropTypes.array.isRequired
 }

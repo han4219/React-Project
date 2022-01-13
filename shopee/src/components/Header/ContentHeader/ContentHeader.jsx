@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as S from './contentHeader.style'
 import PopOver from 'src/components/PopOver/PopOver'
 import usePopOver from 'src/hooks/usePopOver'
 import { path } from 'src/constants/path'
+import useQuery from 'src/hooks/useQuery'
+import { useNavigate } from 'react-router-dom'
 
 export default function ContentHeader() {
   const { activePopOver, showPopOver, hidePopOver } = usePopOver()
+  const [searchValue, SetSearchValue] = useState('')
+  const query = useQuery()
+  const navigate = useNavigate()
+
+  const handleChange = e => {
+    const value = e.target.value
+    SetSearchValue(value)
+  }
+
+  const search = e => {
+    e.preventDefault()
+    navigate(path.home + `?name=${searchValue}`)
+  }
+
+  useEffect(() => {
+    const { name = '' } = query
+    SetSearchValue(name)
+  }, [query])
 
   return (
     <S.ContentWrap>
@@ -21,10 +41,14 @@ export default function ContentHeader() {
       </S.Logo>
       <S.SearchWrap>
         <S.SearchInput
-          type="text"
           placeholder="Tìm kiếm sản phẩm..."
+          value={searchValue}
+          onChange={e => handleChange(e)}
         ></S.SearchInput>
-        <S.SearchButton className="fas fa-search"></S.SearchButton>
+        <S.SearchButton
+          className="fas fa-search"
+          onClick={e => search(e)}
+        ></S.SearchButton>
       </S.SearchWrap>
       <S.Cart>
         <S.CartLogo onMouseEnter={showPopOver} onMouseLeave={hidePopOver}>

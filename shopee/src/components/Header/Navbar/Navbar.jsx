@@ -81,9 +81,17 @@ export default function Navbar() {
             </UserNameWrapper>
             <PopOver active={activePopOver}>
               <>
-                <UserLink to={path.user}>Tài khoản của tôi</UserLink>
-                <UserLink to="">Đơn mua</UserLink>
-                <UserLink to="" onClick={handleLogout}>
+                <UserLink style={{ width: '140px' }} to={path.user}>
+                  Tài khoản của tôi
+                </UserLink>
+                <UserLink style={{ width: '140px' }} to="">
+                  Đơn mua
+                </UserLink>
+                <UserLink
+                  style={{ width: '140px' }}
+                  to=""
+                  onClick={handleLogout}
+                >
                   Đăng xuất
                 </UserLink>
               </>
