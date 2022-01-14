@@ -1,7 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import * as S from './productDetail.style'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import {
@@ -11,23 +9,78 @@ import {
   percentSale
 } from 'src/utils/helper'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { getProductDetail } from './productDetail.slice'
+import { addToCart, getProductDetail } from './productDetail.slice'
 import QuantityInputNumber from 'src/components/QuantityInputNumber/QuantityInputNumber'
 import ProductRating from 'src/components/ProductRating/ProductRating'
+import DOMPurify from 'dompurify'
+import { toast } from 'react-toastify'
 
 export default function ProductDetail() {
   const [product, setProduct] = useState()
+  const [currentImage, setCurrentImage] = useState({})
+  const [currentIndexImages, setCurrentIndexImages] = useState([0, 5])
+  const [quantity, setQuantity] = useState(1)
   const { productId } = useParams()
   const dispatch = useDispatch()
+
+  const currentListImages = useMemo(() => {
+    if (product) {
+      return product.images.slice(...currentIndexImages)
+    }
+    return []
+  }, [product, currentIndexImages])
 
   useEffect(() => {
     const realId = getProductId(productId)
     dispatch(getProductDetail(realId))
       .then(unwrapResult)
       .then(res => {
+        res.data.images = res.data.images.map((image, index) => {
+          return {
+            id: index,
+            url: image
+          }
+        })
+        setCurrentImage(res.data.images[0])
         setProduct(res.data)
       })
   }, [productId, dispatch])
+
+  const chooseCurrentImage = image => setCurrentImage(image)
+
+  const choosePrev = () => {
+    if (currentIndexImages[0] > 0) {
+      currentIndexImages[0] = currentIndexImages[0] - 1
+      currentIndexImages[1] = currentIndexImages[1] - 1
+      setCurrentIndexImages([currentIndexImages[0], currentIndexImages[1]])
+    }
+  }
+  const chooseNext = () => {
+    if (currentIndexImages[1] < product.images.length) {
+      currentIndexImages[0] = currentIndexImages[0] + 1
+      currentIndexImages[1] = currentIndexImages[1] + 1
+      setCurrentIndexImages([currentIndexImages[0], currentIndexImages[1]])
+    }
+  }
+
+  const handleChangeQuantity = value => setQuantity(value)
+
+  const handleAddToCart = async () => {
+    const body = {
+      product_id: product._id,
+      buy_count: quantity
+    }
+    dispatch(addToCart(body))
+      .then(unwrapResult)
+      .then(res => {
+        toast.success(res.message, {
+          position: 'top-center',
+          autoClose: 4000
+        })
+      })
+    // console.log(body)
+  }
+
   return (
     <div>
       {product && (
@@ -35,10 +88,10 @@ export default function ProductDetail() {
           <S.ProductBrief>
             <S.ProductImage>
               <S.ProductMainImage>
-                <img src={product.image} alt="" />
+                <img src={currentImage.url} alt="" />
               </S.ProductMainImage>
               <S.ProductSlide>
-                <S.ProductButtonIconPrev>
+                <S.ProductButtonIconPrev onClick={choosePrev}>
                   <svg
                     enableBackground="new 0 0 13 20"
                     viewBox="0 0 13 20"
@@ -49,12 +102,16 @@ export default function ProductDetail() {
                     <polygon points="4.2 10 12.1 2.1 10 -.1 1 8.9 -.1 10 1 11 10 20 12.1 17.9" />
                   </svg>
                 </S.ProductButtonIconPrev>
-                {product.images.map((image, index) => (
-                  <S.ProductImageItem key={index}>
-                    <img src={image} alt="" />
+                {currentListImages.map(image => (
+                  <S.ProductImageItem
+                    key={image.id}
+                    active={image.id === currentImage.id}
+                    onMouseEnter={() => chooseCurrentImage(image)}
+                  >
+                    <img src={image.url} alt="" />
                   </S.ProductImageItem>
                 ))}
-                <S.ProductButtonIconNext>
+                <S.ProductButtonIconNext onClick={chooseNext}>
                   <svg
                     enableBackground="new 0 0 13 21"
                     viewBox="0 0 13 21"
@@ -95,7 +152,11 @@ export default function ProductDetail() {
 
               <S.ProductQuantity>
                 <div className="text">số lượng</div>
-                <QuantityInputNumber />
+                <QuantityInputNumber
+                  value={quantity}
+                  max={product.quantity}
+                  onChange={handleChangeQuantity}
+                />
 
                 <S.ProductQuantityAvailable>
                   {product.quantity} sản phẩm có sẵn
@@ -103,9 +164,8 @@ export default function ProductDetail() {
               </S.ProductQuantity>
 
               <S.AddToCart>
-                <S.AddToCartButton>
+                <S.AddToCartButton onClick={handleAddToCart}>
                   <i className="fas fa-cart-plus"></i>
-
                   <span>thêm vào giỏ hàng</span>
                 </S.AddToCartButton>
               </S.AddToCart>
@@ -116,7 +176,9 @@ export default function ProductDetail() {
             <S.ProductContentTitle>mô tả sản phẩm</S.ProductContentTitle>
             <S.ProductContentText>
               <div
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(product.description)
+                }}
               ></div>
             </S.ProductContentText>
           </S.ProductContent>

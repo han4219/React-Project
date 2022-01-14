@@ -1,4 +1,5 @@
 import React from 'react'
+import * as S from './style'
 
 export default function BaseInputNumber({ onChange, value, ...props }) {
   const handleChange = e => {
@@ -8,5 +9,12 @@ export default function BaseInputNumber({ onChange, value, ...props }) {
     }
   }
 
-  return <input type="text" value={value} onChange={handleChange} {...props} />
+  return (
+    <S.BaseInputNumber
+      type="text"
+      value={value}
+      onChange={handleChange}
+      {...props}
+    />
+  )
 }

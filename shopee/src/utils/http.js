@@ -24,7 +24,7 @@ class Http {
 
     this.instance.interceptors.request.use(
       config => {
-        const accessToken = LocalStorage.accessToken
+        const accessToken = localStorage.getItem(LocalStorage.accessToken)
         if (accessToken) {
           config.headers.authorization = accessToken
         }

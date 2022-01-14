@@ -1,17 +1,44 @@
-import React, { useState } from 'react'
+import React from 'react'
+import BaseInputNumber from '../BaseInputNumber/BaseInputNumber'
 import * as S from './quantityInputNumber.style'
 
-export default function QuantityInputNumber() {
-  const [value, setValue] = useState('')
-  const handleChange = e => {
-    const val = e.target.value
-    if (/[0-9]/.test(val)) {
-      setValue(val)
+export default function QuantityInputNumber({ value, onChange, max }) {
+  const handleChange = value => {
+    let _value = Number(value)
+    if (_value > max) {
+      _value = max
     }
+    if (_value < 1) {
+      _value = 1
+    }
+    onChange && onChange(_value)
   }
+
+  const increase = () => {
+    let _value = Number(value)
+    if (_value === 1) {
+      _value = 1
+    }
+    if (_value > 1) {
+      _value -= 1
+    }
+    onChange && onChange(_value)
+  }
+
+  const decrease = () => {
+    let _value = Number(value)
+    if (_value === max) {
+      _value = max
+    }
+    if (_value < max) {
+      _value += 1
+    }
+    onChange && onChange(_value)
+  }
+
   return (
     <S.QuantityNumber>
-      <S.QuantityIncreaseIcon>
+      <S.QuantityIncreaseIcon onClick={increase}>
         <svg
           enableBackground="new 0 0 10 10"
           viewBox="0 0 10 10"
@@ -22,12 +49,8 @@ export default function QuantityInputNumber() {
           <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5" />
         </svg>
       </S.QuantityIncreaseIcon>
-      <S.QuantityInput
-        className="input-number"
-        value={value}
-        onChange={e => handleChange(e)}
-      ></S.QuantityInput>
-      <S.QuantityDecreaseIcon>
+      <BaseInputNumber value={value} onChange={handleChange} />
+      <S.QuantityDecreaseIcon onClick={decrease}>
         <svg
           enableBackground="new 0 0 10 10"
           viewBox="0 0 10 10"

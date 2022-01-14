@@ -13,24 +13,36 @@ export const ProductMainImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid #ccc;
+  width: 100%;
   img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 450px;
+    height: 450px;
   }
 `
 export const ProductSlide = styled.div`
+  margin-top: 2rem;
   position: relative;
   display: flex;
   overflow: hidden;
   flex-direction: row;
   max-width: 100%;
   max-height: 90px;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+`
+
+export const ProductImageItem = styled.div`
+  max-width: 8.2rem;
+  max-height: 8.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24%;
+  border: ${props => (props.active ? '2px solid #ee4d2d' : 'none')};
+  cursor: pointer;
   img {
-    padding: 2px;
-    max-width: 8.8rem;
-    max-height: 8.8rem;
-    border: ${({ active }) => (active ? '2px solid #EE4D2D' : '')};
+    width: 100%;
+    height: 100%;
   }
 `
 
@@ -57,7 +69,6 @@ export const ProductButtonIconPrev = styled(ButtonIcon)`
 export const ProductButtonIconNext = styled(ButtonIcon)`
   right: 0;
 `
-export const ProductImageItem = styled.div``
 
 export const ProductMeta = styled.div`
   width: 100%;

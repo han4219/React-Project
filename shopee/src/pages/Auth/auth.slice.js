@@ -16,8 +16,9 @@ export const login = createAsyncThunk(
 const handleAuthFulfilled = (state, action) => {
   const { access_token, user } = action.payload.data
   state.profile = user
+  // console.log(access_token)
   localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile))
-  localStorage.setItem(LocalStorage.accessToken, JSON.stringify(access_token))
+  localStorage.setItem(LocalStorage.accessToken, access_token)
 }
 
 const auth = createSlice({
