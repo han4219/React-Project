@@ -25,7 +25,7 @@ import {
 import useAuthenticated from 'src/hooks/useAuthenticated'
 import { path } from 'src/constants/path'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeOnLogout } from 'src/pages/Auth/auth.slice'
+import { logout } from 'src/pages/Auth/auth.slice'
 import PopOver from 'src/components/PopOver/PopOver'
 import usePopOver from 'src/hooks/usePopOver'
 
@@ -36,7 +36,7 @@ export default function Navbar() {
   const { activePopOver, showPopOver, hidePopOver } = usePopOver()
 
   const handleLogout = () => {
-    dispatch(removeOnLogout())
+    dispatch(logout())
   }
   return (
     <Wrapper>

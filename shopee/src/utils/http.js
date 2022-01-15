@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import LocalStorage from 'src/constants/localStorage'
 
 class Http {
@@ -17,6 +18,10 @@ class Http {
         return result
       },
       ({ response }) => {
+        toast.error('Chưa đăng nhập bé ưiii', {
+          position: 'top-center',
+          autoClose: 3000
+        })
         const result = { ...response.data, status: response.status }
         return Promise.reject(result)
       }

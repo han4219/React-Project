@@ -5,6 +5,9 @@ const authAPI = {
   },
   login(data) {
     return http.post('login', data)
+  },
+  logout() {
+    return http.post('logout')
   }
 }
 export default authAPI

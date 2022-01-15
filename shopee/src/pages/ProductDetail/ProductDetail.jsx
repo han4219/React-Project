@@ -14,6 +14,7 @@ import QuantityInputNumber from 'src/components/QuantityInputNumber/QuantityInpu
 import ProductRating from 'src/components/ProductRating/ProductRating'
 import DOMPurify from 'dompurify'
 import { toast } from 'react-toastify'
+import { getCartPurchases } from '../Cart/cart.slice'
 
 export default function ProductDetail() {
   const [product, setProduct] = useState()
@@ -70,15 +71,15 @@ export default function ProductDetail() {
       product_id: product._id,
       buy_count: quantity
     }
-    dispatch(addToCart(body))
+    await dispatch(addToCart(body))
       .then(unwrapResult)
-      .then(res => {
-        toast.success(res.message, {
+      .then(() => {
+        toast.success('Thêm thành công bé ưiii', {
           position: 'top-center',
           autoClose: 4000
         })
       })
-    // console.log(body)
+    await dispatch(getCartPurchases()).then(unwrapResult)
   }
 
   return (

@@ -1,6 +1,5 @@
 import { unwrapResult } from '@reduxjs/toolkit'
 import { React, useEffect, useState } from 'react'
-
 import { useDispatch } from 'react-redux'
 import FilterPanel from 'src/components/FilterPanel/FilterPanel'
 import SearchItemResult from 'src/components/SearchItemResult/SearchItemResult'
@@ -28,7 +27,7 @@ export default function Home() {
     const _filters = {
       ...query,
       page: query.page || 1,
-      limit: query.limit || 13,
+      limit: query.limit || 15,
       sortBy: query.sortBy || 'view'
     }
     setFilters(_filters)

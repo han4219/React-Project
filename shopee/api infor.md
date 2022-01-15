@@ -80,7 +80,7 @@ Rules
 - email: required, length: 5-160, isEmail
 - password: required, length: 6-160
 
-### Read Products: '/products'
+### Read Products: '/products'==================================================================
 
 ví dụ: 'products?page=1&limit=30&order=createdAt&sortBy=asc'
 Method: GET
@@ -117,7 +117,7 @@ Response
 }
 ```
 
-## Login: `/login`
+## Login: `/login`==================================================================
 
 Method: POST
 body
@@ -158,11 +158,11 @@ Response
 }
 ```
 
-## Logout: `/logout`
+## Logout: `/logout`==================================================================
 
 Method: POST
 
-## Read me: `/me`
+## Read me: `/me`==================================================================
 
 Method: GET
 
@@ -185,7 +185,7 @@ Response
 }
 ```
 
-## Read Products: `/products`
+## Read Products: `/products`==================================================================
 
 Ví du: `products?page=1&limit=30`
 Method: GET
@@ -218,11 +218,11 @@ Response
 }
 ```
 
-## Read Product Detail: `/products/productId`
+## Read Product Detail: `/products/productId`===================================================
 
 Method: GET
 
-## Add To Cart: `/purchases/add-to-cart`
+## Add To Cart: `/purchases/add-to-cart`===================================================
 
 Method: POST
 
@@ -235,7 +235,7 @@ Body
 }
 ```
 
-## Read Purchases: `/purchases`
+## Read Purchases: `/purchases`===========================================================
 
 Method: GET
 Query Params:
@@ -250,7 +250,7 @@ Thông tin `status`:
 4: San phẩm đã được giao
 5: Sản phẩm đã bị hủy
 
-## Update purchase: `/purchases/update-purchase`
+## Update purchase: `/purchases/update-purchase`===================================================
 
 Method: PUT
 Body:
@@ -262,7 +262,7 @@ Body:
 }
 ```
 
-## Delete purchases: `/purchases`
+## Delete purchases: `/purchases`===================================================
 
 Method: DELETE
 body: mảng các `purchase_id`
@@ -271,7 +271,7 @@ body: mảng các `purchase_id`
 ["purchase_id"]
 ```
 
-## Buy purchases: `/purchases/buy-products`
+## Buy purchases: `/purchases/buy-products`===================================================
 
 Method: POST
 body: Mảng các object
@@ -280,7 +280,7 @@ body: Mảng các object
 [{ "product_id": "60afb1c56ef5b902180aacb8", "buy_count": 2 }]
 ```
 
-## Update me: `/user`
+## Update me: `/user`===================================================
 
 Method: PUT
 Body:

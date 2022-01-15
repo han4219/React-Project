@@ -5,12 +5,16 @@ import usePopOver from 'src/hooks/usePopOver'
 import { path } from 'src/constants/path'
 import useQuery from 'src/hooks/useQuery'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { formatMoney } from 'src/utils/helper'
 
 export default function ContentHeader() {
   const { activePopOver, showPopOver, hidePopOver } = usePopOver()
   const [searchValue, SetSearchValue] = useState('')
   const query = useQuery()
   const navigate = useNavigate()
+  const purchases = useSelector(state => state.cart.purchase)
+  const renderPurchase = purchases.length > 0
 
   const handleChange = e => {
     const value = e.target.value
@@ -52,40 +56,43 @@ export default function ContentHeader() {
       </S.SearchWrap>
       <S.Cart>
         <S.CartLogo onMouseEnter={showPopOver} onMouseLeave={hidePopOver}>
-          <S.CartNumberBidge>3</S.CartNumberBidge>
+          {purchases.length > 0 && (
+            <S.CartNumberBidge>{purchases.length}</S.CartNumberBidge>
+          )}
           <S.CartIcon className="fas fa-cart-plus"></S.CartIcon>
           <PopOver active={activePopOver} className="popover">
             <S.WrapContent>
               <S.CartContentTitle>Sản Phẩm Mới Thêm</S.CartContentTitle>
               <S.WrapItem>
-                <S.CartContentItem>
-                  <S.CartContentItemImage src="https://cf.shopee.vn/file/d97880e9c303093035eaaf056b6ad2e5_tn"></S.CartContentItemImage>
-                  <S.CartContentItemText>
-                    Combo Kem Tẩy Lông Seimy - Pure Skin Perfect triệt sạch bất
-                    chấp mọi loại lông vĩnh viễn nhanh gọn chỉ 5 phút
-                  </S.CartContentItemText>
-                  <S.CartContentItemPrice>đ139000</S.CartContentItemPrice>
-                </S.CartContentItem>
-                <S.CartContentItem>
-                  <S.CartContentItemImage src="https://cf.shopee.vn/file/d97880e9c303093035eaaf056b6ad2e5_tn"></S.CartContentItemImage>
-                  <S.CartContentItemText>
-                    Combo Kem Tẩy Lông Seimy - Pure Skin Perfect triệt sạch bất
-                    chấp mọi loại lông vĩnh viễn nhanh gọn chỉ 5 phút
-                  </S.CartContentItemText>
-                  <S.CartContentItemPrice>đ139000</S.CartContentItemPrice>
-                </S.CartContentItem>
-                <S.CartContentItem>
-                  <S.CartContentItemImage src="https://cf.shopee.vn/file/d97880e9c303093035eaaf056b6ad2e5_tn"></S.CartContentItemImage>
-                  <S.CartContentItemText>
-                    Combo Kem Tẩy Lông Seimy - Pure Skin Perfect triệt sạch bất
-                    chấp mọi loại lông vĩnh viễn nhanh gọn chỉ 5 phút
-                  </S.CartContentItemText>
-                  <S.CartContentItemPrice>đ139000</S.CartContentItemPrice>
-                </S.CartContentItem>
+                {renderPurchase ? (
+                  purchases.slice(0, 5).map(purchase => {
+                    return (
+                      <S.CartContentItem key={purchase._id}>
+                        <S.CartContentItemImage
+                          src={purchase.product.image}
+                        ></S.CartContentItemImage>
+                        <S.CartContentItemText>
+                          {purchase.product.name}
+                        </S.CartContentItemText>
+                        <S.CartContentItemPrice>
+                          đ{formatMoney(purchase.price)}
+                        </S.CartContentItemPrice>
+                      </S.CartContentItem>
+                    )
+                  })
+                ) : (
+                  <div>Không có sản phẩm nào.</div>
+                )}
               </S.WrapItem>
             </S.WrapContent>
             <S.CartFooter>
-              <S.MoreProduct>1 Sản Phẩm Vào Giỏ</S.MoreProduct>
+              {purchases.length > 5 ? (
+                <S.MoreProduct>
+                  {purchases.length - 5} Sản Phẩm Vào Giỏ
+                </S.MoreProduct>
+              ) : (
+                ''
+              )}
               <S.CartButton to={path.cart}>Xem Giỏ Hàng</S.CartButton>
             </S.CartFooter>
           </PopOver>
