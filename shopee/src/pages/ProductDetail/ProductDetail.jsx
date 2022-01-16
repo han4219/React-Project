@@ -74,7 +74,7 @@ export default function ProductDetail() {
     await dispatch(addToCart(body))
       .then(unwrapResult)
       .then(() => {
-        toast.success('Thêm thành công bé ưiii', {
+        toast.success('Thêm vào giỏ hàng thành công', {
           position: 'top-center',
           autoClose: 4000
         })

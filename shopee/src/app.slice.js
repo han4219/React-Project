@@ -10,7 +10,6 @@ const appSlice = createSlice({
       action =>
         action.type.endsWith('/fulfilled') || action.type.endsWith('/rejected'),
       (state, action) => {
-        console.log(action)
         state.status = action.payload.status
       }
     )

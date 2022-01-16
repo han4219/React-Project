@@ -45,8 +45,10 @@ export default function Home() {
     const _getProducts = async () => {
       const data = await dispatch(getProducts({ params }))
       const res = unwrapResult(data)
-      setProducts(res.data.products)
-      setPagination(res.data.pagination)
+      if (res) {
+        setProducts(res.data.products)
+        setPagination(res.data.pagination)
+      }
     }
     _getProducts()
   }, [query, dispatch])
