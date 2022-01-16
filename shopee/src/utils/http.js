@@ -18,7 +18,7 @@ class Http {
         return result
       },
       ({ response }) => {
-        toast.error('Chưa đăng nhập bé ưiii', {
+        toast.error('Bạn chưa đăng nhập', {
           position: 'top-center',
           autoClose: 3000
         })
