@@ -75,18 +75,19 @@ export default function FilterPanel({ categories, filters }) {
         tất cả danh mục
       </S.CategoryTitleLink>
       <S.CategoryList>
-        {categories.map(category => {
-          return (
-            <S.CategoryItem key={category._id}>
-              <Link
-                to={path.home + `?category=${category._id}`}
-                className={handleActiveClassItem(category)}
-              >
-                {category.name}
-              </Link>
-            </S.CategoryItem>
-          )
-        })}
+        {categories &&
+          categories.map(category => {
+            return (
+              <S.CategoryItem key={category._id}>
+                <Link
+                  to={path.home + `?category=${category._id}`}
+                  className={handleActiveClassItem(category)}
+                >
+                  {category.name}
+                </Link>
+              </S.CategoryItem>
+            )
+          })}
       </S.CategoryList>
       <S.CategoryTitle>
         <i className="fas fa-filter"></i>
