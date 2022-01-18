@@ -85,7 +85,9 @@ export const CartProductItemPrice = styled.div`
     display: flex;
   }
 `
-export const CartProductItemTotalPrice = styled.div``
+export const CartProductItemTotalPrice = styled.div`
+  margin-left: -5rem;
+`
 export const CartProductItemPriceOrigin = styled.div`
   color: #888888;
   text-decoration: line-through;
@@ -98,7 +100,9 @@ export const CartProductItemPriceSale = styled.div`
 export const CartProductItemPercentDiscount = styled.div`
   color: #ee4d2d;
 `
-export const CartProductItemQuantity = styled.div``
+export const CartProductItemQuantity = styled.div`
+  margin-left: -5rem;
+`
 export const CartProductItemDelete = styled.button`
   margin-right: 5rem;
   border: none;
@@ -136,6 +140,18 @@ export const CartFooterSelectAll = styled.button`
   font-size: 1.6rem;
   text-transform: capitalize;
 `
+
+export const CartFooterDeleteAllButton = styled.button`
+  color: #000;
+  background: transparent;
+  border: none;
+  margin-left: 5rem;
+  font-size: 1.8rem;
+  &:hover {
+    color: #ee4d2d;
+  }
+`
+
 export const CartFooterTotalPrice = styled.div`
   display: flex;
   align-items: center;
@@ -143,6 +159,9 @@ export const CartFooterTotalPrice = styled.div`
     color: #ee4d2d;
     margin: 0 1rem;
     font-size: 2.2rem;
+    span {
+      font-size: 1.4rem;
+    }
   }
 `
 export const CartFooterBuyButton = styled.button`

@@ -65,3 +65,13 @@ const filters = {
 - Nhận thấy khi blur khỏi input thì sẽ gọi sự kiện => thêm prop `onBlur` và component này
 
 ## ProductQuantityInputNumber
+
+- Nhận thấy rằng chỉ gọi api khi out focus khỏi input quantity hoặc khi click vào tăng/giảm số lượng
+- Nếu ta vẫn gọi dùng sự kiện `onChange` thì mỗi lần thay đổi số lượng ở ô input thì nó sẽ gọi api
+  => vì vậy không dùng sự kiện `onChange` ở trường hợp này
+  => Trường hợp này sẽ dùng các sự kiện sau: `onInput`, `onBlur`, `onIncrease`,`onDecrease`
+
+* `onInput`: dùng để cập nhật lại value mỗi khi ta thay đổi giá trị -> dùng để gọi api
+* `onBlur`: khi blur ra ngoài input thì sẽ gọi api cập nhật số lượng mua
+* `onIncrease`: khi ấn nút `+` thì sẽ gọi api và buy_count + 1
+* `onDecrease`: khi ấn nút `-` thì sẽ gọi api và buy_count - 1

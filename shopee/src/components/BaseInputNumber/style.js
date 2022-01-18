@@ -12,4 +12,7 @@ export const BaseInputNumber = styled.input`
   cursor: text;
   border-radius: 0;
   -webkit-appearance: none;
+  &[disabled] {
+    color: #ccc;
+  }
 `

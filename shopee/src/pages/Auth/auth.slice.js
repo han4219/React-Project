@@ -36,10 +36,6 @@ const auth = createSlice({
     profile: JSON.parse(localStorage.getItem(LocalStorage.user)) || {}
   },
   reducers: {
-    // removeOnLogout: state => {
-    //   window.localStorage.clear()
-    //   state.profile = {}
-    // }
     unauthorize: handleUnauthorize
   },
   extraReducers: {

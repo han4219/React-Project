@@ -7,8 +7,8 @@ export const QuantityNumber = styled.div`
 `
 
 export const QuantityIncreaseIcon = styled.button`
-  border-right: 1px solid #e8e8e8;
-  border-left: 0;
+  border-left: 1px solid #e8e8e8;
+  border-right: 0;
   border-bottom: 0;
   border-top: 0;
   width: 3.2rem;
@@ -17,8 +17,8 @@ export const QuantityIncreaseIcon = styled.button`
   color: #999999;
 `
 export const QuantityDecreaseIcon = styled.button`
-  border-left: 1px solid #e8e8e8;
-  border-right: 0;
+  border-right: 1px solid #e8e8e8;
+  border-left: 0;
   border-bottom: 0;
   border-top: 0;
   width: 3.2rem;

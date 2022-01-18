@@ -8,6 +8,21 @@ export const getCartPurchases = createAsyncThunk(
   payloadCreator(purchaseAPI.getCartPurchases)
 )
 
+export const updateCartPurchase = createAsyncThunk(
+  'cart/updateCartPurchase',
+  payloadCreator(purchaseAPI.updateCartPurchase)
+)
+
+export const deletePurchase = createAsyncThunk(
+  'cart/deletePurchase',
+  payloadCreator(purchaseAPI.deletePurchase)
+)
+
+export const buyPurchase = createAsyncThunk(
+  'cart/buyPurchase',
+  payloadCreator(purchaseAPI.buyPurchase)
+)
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {

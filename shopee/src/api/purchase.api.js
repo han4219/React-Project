@@ -13,6 +13,15 @@ const purchaseAPI = {
         status: purchaseStatus.inCart
       }
     })
+  },
+  updateCartPurchase(data) {
+    return http.put(`${URL}/update-purchase`, data)
+  },
+  deletePurchase(data) {
+    return http.delete(`${URL}`, data)
+  },
+  buyPurchase(data) {
+    return http.post(`${URL}/buy-products`, data)
   }
 }
 
