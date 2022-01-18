@@ -75,7 +75,7 @@ export default function ContentHeader() {
                           {purchase.product.name}
                         </S.CartContentItemText>
                         <S.CartContentItemPrice>
-                          đ{formatMoney(purchase.price)}
+                          đ{formatMoney(purchase.price)}x{purchase.buy_count}
                         </S.CartContentItemPrice>
                       </S.CartContentItem>
                     )

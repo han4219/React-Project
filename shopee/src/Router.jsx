@@ -11,6 +11,8 @@ import Register from './pages/Auth/Register/Register'
 import Home from './pages/Home/Home'
 import NotFound from './pages/NotFound/NotFound'
 import ProductDetail from 'src/pages/ProductDetail/ProductDetail'
+import CartLayout from './layouts/CartLayout/CartLayout'
+import Cart from './pages/Cart/Cart'
 export default function Router() {
   return (
     <Routes>
@@ -56,6 +58,18 @@ export default function Router() {
           </React.Fragment>
         }
       ></Route>
+
+      <Route
+        path={path.cart}
+        element={
+          <AuthenticatedGuard>
+            <CartLayout>
+              <Cart />
+            </CartLayout>
+          </AuthenticatedGuard>
+        }
+      ></Route>
+
       <Route
         path={path.user}
         element={
@@ -67,16 +81,6 @@ export default function Router() {
         }
       ></Route>
 
-      <Route
-        path={path.cart}
-        element={
-          <AuthenticatedGuard>
-            <MainLayout>
-              <Home />
-            </MainLayout>
-          </AuthenticatedGuard>
-        }
-      ></Route>
       <Route path={path.notFound} element={<NotFound />}></Route>
     </Routes>
   )

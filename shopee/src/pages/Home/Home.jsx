@@ -28,7 +28,7 @@ export default function Home() {
       ...query,
       page: query.page || 1,
       limit: query.limit || 15,
-      sortBy: query.sortBy || ''
+      sortBy: query.sortBy || 'view'
     }
     setFilters(_filters)
     const params = {

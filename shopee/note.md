@@ -51,3 +51,17 @@ const filters = {
 2. Chúng ta sẽ tracking mỗi status server trả về.
    Nếu là status 401 thì sẽ dispatch một action unauthorize
 3. Chúng ta cần tìm một component để tracking status này, nơi component luôn tồn tại xuyên suốt app của chúng ta => nên là dùng App component
+
+# 5. Phân tích thuật toán của cart
+
+## State của cart
+
+- `purchase = []`
+- Mỗi purchase ngoài việc nắm giữ thông tin từ api trả về chúng còn nắm giữ thuộc tính `disabled` và `checked`
+- Vì thế phải tạo một state mới là `localPurchases` với các `purchase` được add thuộc tính `disabled` và `checked` vào. Dùng `createNextState` (tương tụ `produce` và `immer`) để có thể mutate trực tiếp state của `purchases`
+
+## BaseInputNumber
+
+- Nhận thấy khi blur khỏi input thì sẽ gọi sự kiện => thêm prop `onBlur` và component này
+
+## ProductQuantityInputNumber
