@@ -27,7 +27,9 @@ export const ProductHeaderName = styled.div`
   margin-left: 2rem;
 `
 export const ProductHeaderPrice = styled.div``
-export const ProductHeaderQuantity = styled.div``
+export const ProductHeaderQuantity = styled.div`
+  margin-left: 3rem;
+`
 export const ProductHeaderTotalPrice = styled.div``
 export const ProductHeaderAction = styled.div``
 // end header product cart

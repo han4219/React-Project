@@ -14,6 +14,13 @@ const purchaseAPI = {
       }
     })
   },
+  getPurchasesWatting() {
+    return http.get(`${URL}`, {
+      params: {
+        status: purchaseStatus.watting
+      }
+    })
+  },
   updateCartPurchase(data) {
     return http.put(`${URL}/update-purchase`, data)
   },

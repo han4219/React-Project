@@ -23,6 +23,11 @@ export const buyPurchase = createAsyncThunk(
   payloadCreator(purchaseAPI.buyPurchase)
 )
 
+export const getPurchasesWatting = createAsyncThunk(
+  'cart/getPurchasesWatting',
+  payloadCreator(purchaseAPI.getPurchasesWatting)
+)
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
