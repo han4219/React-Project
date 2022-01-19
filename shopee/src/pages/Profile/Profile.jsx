@@ -1,14 +1,12 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { path } from 'src/constants/path'
-import { formatMoney } from 'src/utils/helper'
 import * as S from './profile.style'
 
 export default function Profile() {
   const profile = useSelector(state => state.auth.profile)
   const location = useLocation()
-  const dispatch = useDispatch()
 
   const handleActiveClass = location.pathname === path.user ? 'active-me' : ''
 
