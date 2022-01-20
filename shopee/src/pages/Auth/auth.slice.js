@@ -46,6 +46,5 @@ const auth = createSlice({
 })
 
 const authReducer = auth.reducer
-export const { removeOnLogout } = auth.actions
 export const unauthorize = auth.actions.unauthorize
 export default authReducer
